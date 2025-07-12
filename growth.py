@@ -7,6 +7,8 @@ print("new local changes")
 
 print("added another computer")
 
+print("reinstalled the OS, checked git")
+
 
 api_url = 'http://api.open-notify.org/iss-now.json'
 
