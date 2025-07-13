@@ -1,28 +1,27 @@
 import requests
+import time
 
+API_URL = 'https://api.telegram.org/bot'
+BOT_TOKEN = '*****'
+TEXT = 'AMAZING!'
+MAX_COUNTER = 100
 
-print("repeat git")
+offset = -2
+counter = 0
+chat_id: int
 
-print("new local changes")
+while counter < MAX_COUNTER:
 
-print("added another computer")
+    print('attempt =', counter)  #Чтобы видеть в консоли, что код живет
 
-print("reinstalled the OS, checked git")
+    updates = requests.get(f'{API_URL}{BOT_TOKEN}/getUpdates?offset={offset + 1}').json()
+    print(updates)
 
+    if updates['result']:
+        for result in updates['result']:
+            offset = result['update_id']
+            chat_id = result['message']['from']['id']
+            requests.get(f'{API_URL}{BOT_TOKEN}/sendMessage?chat_id={chat_id}&text={TEXT}')
 
-api_url = 'http://api.open-notify.org/iss-now.json'
-
-response = requests.get(api_url)
-
-if response.status_code == 200:
-    print(response.text)
-else:
-    print(response.status_code)
-
-
-# api_url = "http://api.open-notify.org/iss-now.json"
-# response = requests.get(api_url)
-# coordinates = response.json().get("iss_position")
-# formatted_coordinates = f"{coordinates['longitude']}%2C{coordinates['latitude']}"
-# map_url = f"https://yandex.com/maps/?ll={formatted_coordinates}&z=10"
-# print(map_url)
+    time.sleep(1)
+    counter += 1
