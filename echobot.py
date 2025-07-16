@@ -3,7 +3,7 @@ from aiogram.filters import Command
 from aiogram.types import Message
 
 
-BOT_TOKEN = '******************'
+BOT_TOKEN = '****************************'
 
 # Создаем объекты бота и диспетчера
 bot = Bot(token=BOT_TOKEN)
@@ -40,10 +40,16 @@ async def send_sticker_echo(message: Message):
     await message.reply_sticker(message.sticker.file_id)
 
 
+# Этот хэндлер будет срабатывать на отправку боту voice
+async def send_voice_echo(message: Message):
+    await message.reply_voice(message.voice.file_id)
+
+
 dp.message.register(process_start_command, Command(commands='start'))
 dp.message.register(process_help_command, Command(commands='help'))
 dp.message.register(send_photo_echo, F.photo)
 dp.message.register(send_sticker_echo, F.sticker)
+dp.message.register(send_voice_echo, F.voice)
 dp.message.register(send_echo)
 
 
