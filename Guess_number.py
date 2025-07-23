@@ -4,7 +4,7 @@ from aiogram import Bot, Dispatcher, F
 from aiogram.filters import Command, CommandStart
 from aiogram.types import Message
 
-BOT_TOKEN = '*********************************************'
+BOT_TOKEN = '*************************************'
 
 # Создаем объекты бота и диспетчера
 bot = Bot(BOT_TOKEN)
